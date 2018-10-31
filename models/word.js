@@ -1,10 +1,38 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Word = sequelize.define('Word', {
+    const Op = sequelize.Op;
+  const Word = sequelize.define('words', {
     value: DataTypes.STRING
   }, {});
+
   Word.associate = function(models) {
     // associations can be defined here
   };
+
+  Word.prototype.findAnagrams = async (word) => {
+      let wrdLength =  '';
+      let anagramsList = [];
+      for (let i = 0; i < word.length; i++) {
+          wrdLength += '_';
+      }
+
+    let wordsArr = await Word.findAll({
+        value: {
+            where: {
+                [Op.like]: wrdLength
+            }
+        }
+    });
+
+    for (let i = 0; i < wordsArr.length; i++) {
+        if(wordsArr[i].toLowerCase().split('').sort().join('') === wordsArr[i].toLowerCase().split('').sort().join('')) {
+            anagramsList.push(wordsArr[i]);
+        };
+    }
+
+    return anagramsList;
+
+  };
+
   return Word;
 };

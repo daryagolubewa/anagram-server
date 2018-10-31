@@ -9,10 +9,10 @@ module.exports = {
         wordObjects = text.split('\n');
         wordObjects = wordObjects.map(x=> x={value: x});
 
-      return queryInterface.bulkInsert('Words', wordObjects, {});
+      return queryInterface.bulkInsert('words', wordObjects, {});
   },
 
   down: (queryInterface, Sequelize) => {
-      return queryInterface.bulkDelete('Words', null, {});
+      return queryInterface.bulkDelete('words', null, {});
   }
 };
