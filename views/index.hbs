@@ -1,2 +1,24 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<main class="container">
+
+
+    <section class="sidebar">
+        <h1> Find anagram</h1>
+
+        <form id="anagram_finder" action="/" method="post">
+            <input type="text" name="put_a_word">
+            <input type="submit" value="Click to find">
+        </form><br>
+    </section>
+
+
+    <div class="sign-text">
+
+        {{#each anagramsList}}
+            {{this}}
+        {{/each}}
+
+
+
+    </div>
+
+</main>

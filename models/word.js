@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
     const Op = sequelize.Op;
   const Word = sequelize.define('words', {
@@ -17,22 +18,25 @@ module.exports = (sequelize, DataTypes) => {
       }
 
     let wordsArr = await Word.findAll({
-        value: {
-            where: {
+        where: {
+            value: {
                 [Op.like]: wrdLength
             }
         }
     });
 
     for (let i = 0; i < wordsArr.length; i++) {
-        if(wordsArr[i].toLowerCase().split('').sort().join('') === wordsArr[i].toLowerCase().split('').sort().join('')) {
+        if(wordsArr[i].value.toLowerCase().split('').sort().join('') === word.toLowerCase().split('').sort().join('')) {
             anagramsList.push(wordsArr[i]);
         };
     }
 
     return anagramsList;
 
+
   };
+
+
 
   return Word;
 };
