@@ -6,7 +6,7 @@ let anagramsList = [];
 
 
 router.get('/', function(req, res) {
-    res.render('index', anagramsList);
+    res.render('index', {list: anagramsList});
     console.log(anagramsList);
 });
 
@@ -16,7 +16,7 @@ router.post('/', async function(req, res) {
     let anagrams =  await wordList.findAnagrams(word);
     anagrams.map(x => anagramsList.push(x.value));
     res.redirect('/');
-    // res.send(200, anagramsList)
+
 });
 
 
